@@ -289,7 +289,8 @@ static void kbd_callback(const char *name, int name_len,
 						 void **abstract)
 {
 	for ( int i=0; i<num_prompts; i++) {
-		const char *p = kb_gets(prompts[i].text, prompts[i].echo);
+		// const char *p = kb_gets(prompts[i].text, prompts[i].echo);
+		const char *p = kb_gets(reinterpret_cast<const char*>(prompts[i].text), prompts[i].echo);
 		if ( p!=NULL ) {
 			responses[i].text = strdup(p);
 			responses[i].length = strlen(p);

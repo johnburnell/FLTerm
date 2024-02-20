@@ -100,11 +100,17 @@ void setTransparency(Fl_Window *pWin, double alpha)
 					PropModeReplace, (unsigned char *)&opacity, 1);
 }
 #endif
+
 #define OPEN_FILE 	Fl_Native_File_Chooser::BROWSE_FILE
 #define SAVE_FILE	Fl_Native_File_Chooser::BROWSE_SAVE_FILE
-static Fl_Native_File_Chooser fnfc;
+
+// Making this static causes a segfault - FLTK hasn't been initialised
+// It's not needed
+//static Fl_Native_File_Chooser fnfc;
+
 const char *file_chooser(const char *title, const char *filter, int type)
 {
+  Fl_Native_File_Chooser fnfc;
 	fnfc.title(title);
 	fnfc.filter(filter);
 	fnfc.type(type);
